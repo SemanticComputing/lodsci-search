@@ -1,0 +1,21 @@
+<table class="table table-striped norssi-table ng-table-responsive" ng-table="vm.tableParams">
+  <thead>
+    <tr>
+      <th class="col-xs-2">Dataset</th>
+      <th class="col-xs-4">Description</th>
+      <th class="col-xs-3">Organization</th>
+      <th class="col-xs-3">License</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr ng-show="!vm.isLoadingResults" ng-repeat="dataset in $data">
+    <td>{{ ::dataset.title }}</td>
+    <td>{{ ::dataset.description }}</td>
+    <td>
+      <span ng-if="::dataset.creator">Creator: {{ ::vm.toArray(dataset.creator) | join:', ' }}</td>
+      <span ng-if="::dataset.publisher">Publisher: {{ ::vm.toArray(dataset.publisher) | join:', ' }}</td>
+    <td>{{ ::dataset.license }}</td>
+  </tr>
+  </tbody>
+</table>
+<img class="loading-img" src="images/loading-lg.gif" ng-if="vm.isLoadingResults"></img>
