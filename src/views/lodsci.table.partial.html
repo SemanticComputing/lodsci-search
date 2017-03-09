@@ -10,11 +10,16 @@
   <tbody>
   <tr ng-show="!vm.isLoadingResults" ng-repeat="dataset in $data">
     <td>{{ ::dataset.title }}</td>
-    <td>{{ ::dataset.description }}</td>
     <td>
-      <span ng-if="::dataset.creator">Creator: {{ ::vm.toArray(dataset.creator) | join:', ' }}</td>
-      <span ng-if="::dataset.publisher">Publisher: {{ ::vm.toArray(dataset.publisher) | join:', ' }}</td>
-    <td>{{ ::dataset.license }}</td>
+      {{ ::dataset.description }}
+      <span ng-if="::dataset.subject"><br /><b>Subject:</b> {{ ::vm.toArray(dataset.subject) | join: ', ' }}</span>
+    </td>
+    <td>
+      <span ng-if="::dataset.rightsHolder"><b>Rights Holder:</b> {{ ::vm.toArray(dataset.rightsHolder) | join:', ' }}<br /></span>
+      <span ng-if="::dataset.creator"><b>Creator:</b> {{ ::vm.toArray(dataset.creator) | join:', ' }}<br /></span>
+      <span ng-if="::dataset.publisher"><b>Publisher:</b> {{ ::vm.toArray(dataset.publisher) | join:', ' }}<br /></span>
+    </td>
+    <td>{{ ::vm.toArray(dataset.license) | join:', ' }}</td>
   </tr>
   </tbody>
 </table>

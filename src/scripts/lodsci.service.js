@@ -37,6 +37,18 @@
                 name: 'Haku',
                 enabled: true
             },
+            subject: {
+                facetId: 'subject',
+                predicate: '<http://purl.org/dc/terms/subject>',
+                name: 'Subject',
+                enabled: true
+            },
+            rightsHolder: {
+                facetId: 'rightsHolder',
+                predicate: '<http://purl.org/dc/terms/rightsHolder>',
+                name: 'Rights Holder',
+                enabled: true
+            },
             creator: {
                 facetId: 'creator',
                 predicate: '<http://purl.org/dc/terms/creator>',
@@ -81,6 +93,8 @@
         '  OPTIONAL { ?id dct:creator ?creator . FILTER(lang(?creator) = "en") }' +
         '  OPTIONAL { ?id dct:creator ?creator . FILTER(lang(?creator) = "fi") }' +
         '  OPTIONAL { ?id dct:creator ?creator . }' +
+        '  OPTIONAL { ?id dct:subject ?subject . }' +
+        '  OPTIONAL { ?id dct:rightsHolder ?rightsHolder . }' +
         '  OPTIONAL { ?id dct:publisher ?publisher . } ' +
         ' }';
 
