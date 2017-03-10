@@ -1,0 +1,10 @@
+<span ng-repeat="val in $ctrl.value">
+  <span ng-switch="::$ctrl.isResource(val)">
+    <span ng-switch-when="true">
+      <a ng-href="{{ ::val.id }}">{{ val.label || val.id }}{{ $last ? '' : ', ' }}</a>
+    </span>
+    <span ng-switch-default>
+      {{ ::val.id }}{{ $last ? '' : ', ' }}
+    </span>
+  </span>
+</span><br />

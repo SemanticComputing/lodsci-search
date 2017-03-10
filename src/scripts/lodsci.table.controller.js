@@ -7,7 +7,6 @@
 
     'use strict';
 
-    /* eslint-disable angular/no-service-method */
     angular.module('facetApp')
 
     /*

@@ -41,6 +41,7 @@
                 facetId: 'subject',
                 predicate: '<http://purl.org/dc/terms/subject>',
                 name: 'Subject',
+                services: ['<http://api.finto.fi/sparql>'],
                 enabled: true
             },
             rightsHolder: {
@@ -77,6 +78,7 @@
         ' PREFIX dct: <http://purl.org/dc/terms/> ' +
         ' PREFIX skos: <http://www.w3.org/2004/02/skos/core#> ' +
         ' PREFIX xml: <http://www.w3.org/XML/1998/namespace> ' +
+        ' PREFIX sf: <http://ldf.fi/functions#> ' +
         ' PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> ';
 
         // The query for the results.
@@ -85,17 +87,40 @@
         '  { ' +
         '    <RESULT_SET> ' +
         '  } ' +
-        '  OPTIONAL { ?id dct:title ?title . FILTER(lang(?title) = "en") }' +
-        '  OPTIONAL { ?id dct:title ?title . FILTER(lang(?title) = "fi") }' +
-        '  OPTIONAL { ?id dct:title ?title . }' +
-        '  OPTIONAL { ?id dct:description ?description . }' +
-        '  OPTIONAL { ?id dct:license ?license . }' +
-        '  OPTIONAL { ?id dct:creator ?creator . FILTER(lang(?creator) = "en") }' +
-        '  OPTIONAL { ?id dct:creator ?creator . FILTER(lang(?creator) = "fi") }' +
-        '  OPTIONAL { ?id dct:creator ?creator . }' +
-        '  OPTIONAL { ?id dct:subject ?subject . }' +
-        '  OPTIONAL { ?id dct:rightsHolder ?rightsHolder . }' +
-        '  OPTIONAL { ?id dct:publisher ?publisher . } ' +
+        '  OPTIONAL { ?id sf:preferredLanguageLiteral (dct:title "en" "fi" "" ?title) . }' +
+        '  OPTIONAL { ?id sf:preferredLanguageLiteral (dct:description "en" "fi" "" ?description) . }' +
+        '  OPTIONAL {' +
+        '    ?id dct:license ?license__id .' +
+        '    BIND(ISURI(?license__id) AS ?license__isResource)' +
+        '    OPTIONAL { ?license__id sf:preferredLanguageLiteral (skos:prefLabel rdfs:label "en" "fi" "" ?license__label) . }' +
+        '  } ' +
+        '  OPTIONAL {' +
+        '    ?id dct:creator ?creator__id .' +
+        '    BIND(ISURI(?creator__id) AS ?creator__isResource)' +
+        '    OPTIONAL { ?creator__id sf:preferredLanguageLiteral (skos:prefLabel rdfs:label "en" "fi" "" ?creator__label) . }' +
+        '  } ' +
+        '  OPTIONAL {' +
+        '    ?id dct:subject ?subject__id .' +
+        '    BIND(ISURI(?subject__id) AS ?subject__isResource)' +
+        '    OPTIONAL {' +
+        '      SERVICE <http://api.finto.fi/sparql> {' +
+        '        ?subject__id skos:prefLabel [] .' +
+        '        OPTIONAL { ?subject__id skos:prefLabel ?subject__label . FILTER(langMatches(lang(?subject__label), "en")) }' +
+        '        OPTIONAL { ?subject__id skos:prefLabel ?subject__label . FILTER(langMatches(lang(?subject__label), "fi")) }' +
+        '        OPTIONAL { ?subject__id skos:prefLabel ?subject__label . }' +
+        '      }' +
+        '    }' +
+        '  }' +
+        '  OPTIONAL {' +
+        '    ?id dct:rightsHolder ?rightsHolder__id .' +
+        '    BIND(ISURI(?rightsHolder__id) AS ?rightsHolder__isResource)' +
+        '    OPTIONAL { ?rightsHolder__id sf:preferredLanguageLiteral (skos:prefLabel rdfs:label "en" "fi" "" ?rightsHolder__label) . }' +
+        '  } ' +
+        '  OPTIONAL {' +
+        '    ?id dct:publisher ?publisher__id .' +
+        '    BIND(ISURI(?publisher__id) AS ?publisher__isResource)' +
+        '    OPTIONAL { ?publisher__id sf:preferredLanguageLiteral (skos:prefLabel rdfs:label "en" "fi" "" ?publisher__label) . }' +
+        '  } ' +
         ' }';
 
         // The SPARQL endpoint URL
@@ -108,7 +133,7 @@
                 '  OPTIONAL { ?id <http://purl.org/dc/terms/title> ?title . FILTER(lang(?title) = "en") }' +
                 '  OPTIONAL { ?id <http://purl.org/dc/terms/title> ?title . FILTER(lang(?title) = "fi") }' +
                 '  OPTIONAL { ?id <http://purl.org/dc/terms/title> ?title . }',
-            preferredLang : 'fi'
+            preferredLang : 'en'
         };
 
         var resultOptions = {

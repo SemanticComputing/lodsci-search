@@ -9,17 +9,25 @@
   </thead>
   <tbody>
   <tr ng-show="!vm.isLoadingResults" ng-repeat="dataset in $data">
-    <td>{{ ::dataset.title }}</td>
+    <td><a ng-href="{{ ::dataset.id }}">{{ ::dataset.title }}</a></td>
     <td>
       {{ ::dataset.description }}
-      <span ng-if="::dataset.subject"><br /><b>Subject:</b> {{ ::vm.toArray(dataset.subject) | join: ', ' }}</span>
+      <span ng-if="::dataset.subject"><br /><b>Subject:</b>
+        <lodsci-value-list data-value="::dataset.subject"></lodsci-value-list>
+      </span>
     </td>
     <td>
-      <span ng-if="::dataset.rightsHolder"><b>Rights Holder:</b> {{ ::vm.toArray(dataset.rightsHolder) | join:', ' }}<br /></span>
-      <span ng-if="::dataset.creator"><b>Creator:</b> {{ ::vm.toArray(dataset.creator) | join:', ' }}<br /></span>
-      <span ng-if="::dataset.publisher"><b>Publisher:</b> {{ ::vm.toArray(dataset.publisher) | join:', ' }}<br /></span>
+      <span ng-if="::dataset.rightsHolder"><b>Rights Holder:</b>
+        <lodsci-value-list data-value="::dataset.rightsHolder"></lodsci-value-list>
+      </span>
+      <span ng-if="::dataset.creator"><b>Creator:</b>
+        <lodsci-value-list data-value="::dataset.creator"></lodsci-value-list>
+      </span>
+      <span ng-if="::dataset.publisher"><b>Publisher:</b>
+        <lodsci-value-list data-value="::dataset.publisher"></lodsci-value-list>
+      </span>
     </td>
-    <td>{{ ::vm.toArray(dataset.license) | join:', ' }}</td>
+    <td><lodsci-value-list data-value="::dataset.license"></lodsci-value-list></td>
   </tr>
   </tbody>
 </table>
