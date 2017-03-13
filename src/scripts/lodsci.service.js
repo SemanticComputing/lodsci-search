@@ -133,7 +133,7 @@
                 '  OPTIONAL { ?id <http://purl.org/dc/terms/title> ?title . FILTER(lang(?title) = "en") }' +
                 '  OPTIONAL { ?id <http://purl.org/dc/terms/title> ?title . FILTER(lang(?title) = "fi") }' +
                 '  OPTIONAL { ?id <http://purl.org/dc/terms/title> ?title . }',
-            preferredLang : 'en'
+            preferredLang : ['en', 'fi']
         };
 
         var resultOptions = {
