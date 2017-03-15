@@ -41,6 +41,7 @@
                 facetId: 'subject',
                 predicate: '<http://purl.org/dc/terms/subject>',
                 name: 'Subject',
+                services: ['<http://api.finto.fi/sparql>'],
                 enabled: true
             },
             rightsHolder: {
