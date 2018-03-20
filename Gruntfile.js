@@ -4,9 +4,11 @@
 
 module.exports = function (grunt) {
 
-    var modRewrite = require('connect-modrewrite');
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
+
+    var modRewrite = require('connect-modrewrite');
+    var serveStatic = require('serve-static');
 
     grunt.loadNpmTasks('grunt-cdnify');
     grunt.loadNpmTasks('grunt-replace');
@@ -37,14 +39,13 @@ module.exports = function (grunt) {
             },
             js: {
                 files: ['<%= yeoman.app %>/**/*.js'],
-                tasks: ['newer:jshint:all'],
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
             },
             jsTest: {
                 files: ['test/spec/{,*/}*.js'],
-                tasks: ['newer:jshint:test', 'karma']
+                tasks: ['karma']
             },
             compass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -79,24 +80,24 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             modRewrite(['!\\.html|\\.js|\\.css|\\.png|\\.jpg|\\.gif|\\.svg|\\woff|\\woff2$ /index.html [L]']),
-                            connect.static('.tmp'),
+                            serveStatic('.tmp'),
                             connect().use(
                                 '/bower_components',
-                                connect.static('./bower_components')
+                                serveStatic('./bower_components')
                             ),
                             connect().use(
                                 '/page-templates',
-                                connect.static('./page-templates')
+                                serveStatic('./page-templates')
                             ),
                             connect().use(
                                 '/styles',
-                                connect.static('./src/styles')
+                                serveStatic('./src/styles')
                             ),
                             connect().use(
                                 '/pageimages',
-                                connect.static('./pageimages')
+                                serveStatic('./pageimages')
                             ),
-                            connect.static(appConfig.app)
+                            serveStatic(appConfig.app)
                         ];
                     }
                 }
@@ -106,13 +107,13 @@ module.exports = function (grunt) {
                     port: 9001,
                     middleware: function (connect) {
                         return [
-                            connect.static('.tmp'),
-                            connect.static('test'),
+                            serveStatic('.tmp'),
+                            serveStatic('test'),
                             connect().use(
                                 '/bower_components',
-                                connect.static('./bower_components')
+                                serveStatic('./bower_components')
                             ),
-                            connect.static(appConfig.app)
+                            serveStatic(appConfig.app)
                         ];
                     }
                 }
@@ -122,26 +123,6 @@ module.exports = function (grunt) {
                     open: true,
                     base: '<%= yeoman.dist %>'
                 }
-            }
-        },
-
-        // Make sure code styles are up to par and there are no obvious mistakes
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc',
-                reporter: require('jshint-stylish')
-            },
-            all: {
-                src: [
-                    'Gruntfile.js',
-                    '<%= yeoman.app %>/scripts/**/*.js'
-                ]
-            },
-            test: {
-                options: {
-                    jshintrc: 'test/.jshintrc'
-                },
-                src: ['test/spec/{,*/}*.js']
             }
         },
 
@@ -492,7 +473,6 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('default', [
-        'newer:jshint',
         'test',
         'build'
     ]);
