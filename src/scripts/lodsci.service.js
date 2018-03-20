@@ -8,7 +8,7 @@
     .service('lodsciService', lodsciService);
 
     /* @ngInject */
-    function lodsciService($q, $location, _, FacetResultHandler) {
+    function lodsciService($q, $location, _, FacetResultHandler, tagStrippingFacetMapper) {
 
         var DEFAULT_SORT_KEY = '?id';
 
@@ -42,30 +42,35 @@
                 predicate: '<http://purl.org/dc/terms/subject>',
                 name: 'Subject',
                 services: ['<http://api.finto.fi/sparql>'],
+                mapper: tagStrippingFacetMapper,
                 enabled: true
             },
             rightsHolder: {
                 facetId: 'rightsHolder',
                 predicate: '<http://purl.org/dc/terms/rightsHolder>',
                 name: 'Rights Holder',
+                mapper: tagStrippingFacetMapper,
                 enabled: true
             },
             creator: {
                 facetId: 'creator',
                 predicate: '<http://purl.org/dc/terms/creator>',
                 name: 'Creator',
+                mapper: tagStrippingFacetMapper,
                 enabled: true
             },
             publisher: {
                 facetId: 'publisher',
                 predicate: '<http://purl.org/dc/terms/publisher>',
                 name: 'Publisher',
+                mapper: tagStrippingFacetMapper,
                 enabled: true
             },
             license: {
                 facetId: 'license',
                 predicate: '<http://purl.org/dc/terms/license>',
                 name: 'License',
+                mapper: tagStrippingFacetMapper,
                 enabled: true
             }
         };

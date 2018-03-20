@@ -11,7 +11,7 @@
   <tr ng-show="!vm.isLoadingResults" ng-repeat="dataset in $data">
     <td><a ng-href="{{ ::dataset.id }}">{{ ::dataset.title }}</a></td>
     <td>
-      {{ ::dataset.description }}
+      <span ng-bind-html="::dataset.description | safe"></span>
       <span ng-if="::dataset.subject"><br /><b>Subject:</b>
         <lodsci-value-list data-value="::dataset.subject"></lodsci-value-list>
       </span>

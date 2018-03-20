@@ -3,8 +3,6 @@
     <span ng-switch-when="true">
       <a ng-href="{{ ::val.id }}">{{ val.label || val.id }}{{ $last ? '' : ', ' }}</a>
     </span>
-    <span ng-switch-default>
-      {{ ::val.id }}{{ $last ? '' : ', ' }}
-    </span>
+    <span ng-switch-default ng-bind-html="val.id | safe"></span>
   </span>
 </span><br />
