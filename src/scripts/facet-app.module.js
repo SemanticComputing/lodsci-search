@@ -11,6 +11,7 @@
         'ngTable',
         'angular.filter',
         'ngAnimate',
+        'ngSanitize',
         'ui.bootstrap'
     ])
 

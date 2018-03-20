@@ -25,6 +25,7 @@
     "sparql-faceter": "#master",
     "lodash": "^4.17.4",
     "angular-filter": "^0.5.14",
-    "angular-bootstrap": "^2.4.0"
+    "angular-bootstrap": "^2.4.0",
+    "angular-sanitize": "^1.6.9"
   }
 }

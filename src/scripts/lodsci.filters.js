@@ -5,9 +5,9 @@
     angular.module('facetApp')
 
     /* @ngInject */
-    .filter('safe', function($sce) {
+    .filter('safe', function($sanitize) {
         return function(html) {
-            return $sce.trustAsHtml(html);
+            return $sanitize(html);
         };
     });
 })();
