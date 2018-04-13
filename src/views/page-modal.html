@@ -8,14 +8,14 @@
       <button class="btn btn-default"
           ng-click="$ctrl.previousPage()"
           ng-disabled="$ctrl.pageNo === 1"
-          aria-label="Edellinen sivu">
+          aria-label="Previous page">
         <span class="glyphicon glyphicon-step-backward"></span>
       </button>
       <span>{{ $ctrl.pageNo }}</span>
       <button class="btn btn-default"
           ng-click="$ctrl.nextPage()"
           ng-disabled="$ctrl.pageNo === 716"
-          aria-label="Seuraava sivu">
+          aria-label="Next page">
         <span class="glyphicon glyphicon-step-forward"></span>
       </button>
       <button ng-click="$ctrl.close()" class="btn btn-default" aria-label="Sulje">

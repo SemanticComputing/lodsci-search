@@ -3,26 +3,15 @@
 
     angular.module('facetApp')
 
-    .directive('wsNavbar', wsNavbarDirective);
+    .directive('lodsciNavbar', lodsciNavbarDirective);
 
     /* @ngInject */
-    function wsNavbarDirective($templateRequest, $compile, $uibModal) {
+    function lodsciNavbarDirective($templateRequest, $compile, $uibModal) {
         return {
-            link: link,
             controller: NavbarController,
+            templateUrl: 'views/navbar-fi.html',
             controllerAs: 'vm'
         };
-
-        function link(scope, elem) {
-            return $templateRequest('navbar-fi.html')
-            .then(function(template) {
-                elem.html(template);
-                return $templateRequest('views/subnavbar.html');
-            }).then(function(template) {
-                angular.element('#subnav').html(template);
-                return $compile(elem.contents())(scope);
-            });
-        }
 
         function NavbarController() {
             var vm = this;

@@ -34,14 +34,14 @@
             text: {
                 facetId: 'text',
                 predicate: '<http://purl.org/dc/terms/description>',
-                name: 'Haku',
+                name: 'Free Text Search',
                 enabled: true
             },
             subject: {
                 facetId: 'subject',
                 predicate: '<http://purl.org/dc/terms/subject>',
-                name: 'Subject',
-                services: ['<http://api.finto.fi/sparql>'],
+                name: 'Keywords',
+                services: ['<http://api.finto.fi/sparql>', '<http://dbpedia.org/sparql>'],
                 mapper: tagStrippingFacetMapper,
                 enabled: true
             },
