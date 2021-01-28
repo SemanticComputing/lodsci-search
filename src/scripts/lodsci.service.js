@@ -41,7 +41,7 @@
                 facetId: 'subject',
                 predicate: '<http://purl.org/dc/terms/subject>',
                 name: 'Keywords',
-                services: ['<http://api.finto.fi/sparql>', '<http://dbpedia.org/sparql>'],
+                services: ['<http://api.finto.fi/sparql>' /*, '<https://dbpedia.org/sparql>'*/],
                 mapper: tagStrippingFacetMapper,
                 enabled: true
             },
