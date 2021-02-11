@@ -41,7 +41,7 @@
                 facetId: 'subject',
                 predicate: '<http://purl.org/dc/terms/subject>',
                 name: 'Keywords',
-                services: ['<http://api.finto.fi/sparql>' /*, '<https://dbpedia.org/sparql>'*/],
+                services: ['<https://api.finto.fi/sparql>' /*, '<https://dbpedia.org/sparql>'*/],
                 mapper: tagStrippingFacetMapper,
                 enabled: true
             },
@@ -108,7 +108,7 @@
         '    ?id dct:subject ?subject__id .' +
         '    BIND(ISURI(?subject__id) AS ?subject__isResource)' +
         '    OPTIONAL {' +
-        '      SERVICE <http://api.finto.fi/sparql> {' +
+        '      SERVICE <https://api.finto.fi/sparql> {' +
         '        ?subject__id skos:prefLabel [] .' +
         '        OPTIONAL { ?subject__id skos:prefLabel ?subject__label . FILTER(langMatches(lang(?subject__label), "en")) }' +
         '        OPTIONAL { ?subject__id skos:prefLabel ?subject__label . FILTER(langMatches(lang(?subject__label), "fi")) }' +
